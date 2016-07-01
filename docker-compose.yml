@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  data:
+    image: busybox:latest
+    volumes:
+      - /var/www/html
+      - /var/lib/mysql
+
+  web:
+    restart: always
+    depends_on:
+      - db
+    build: .
+    volumes_from:
+      - data
+    # volumes:
+    #   - "./wp-content/themes/mytheme:/var/www/html/wp-content/themes/mytheme"
+    #   - data-web:/var/www/html
+    ports:
+      - "8000:80"
+    links:
+      - db:mysql
+    env_file: .env
+
+  db:
+    restart: always
+    image: mysql:latest
+    volumes_from:
+      - data
+    # volumes:
+    #   - data-db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    env_file: .env
+
+# volumes:
+#   data-db: {}
+#   data-web: {}
