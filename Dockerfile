@@ -7,4 +7,5 @@ RUN apt-get update && \
     nodejs
 RUN npm -g install npm@latest
 RUN npm install --global gulp-cli
+RUN echo 'opcache.enable=0' >> /usr/local/etc/php/conf.d/opcache-recommended.ini
 WORKDIR /var/www/html/
