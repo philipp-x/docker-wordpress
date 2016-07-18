@@ -45,6 +45,15 @@ Type `docker-compose stop` to stop running containers without removing them.
 5. Log in to the WordPress Admin Panels and select the `Appearance` panel, then `Themes`.
 6. To activate the Theme click the `Activate` button.
 
+### I18n
+
+1. Run `./makepot.sh` to generate a `.pot` file for your theme.
+2. Translate the `msgstr` sections to the desired language. The result is a `.po` file named `locale`.po (e.g., en_GB.po).
+3. Make sure to replace `CHARSET` with `UTF-8`.
+4. Run `./potomo.sh` to compile the `.po` files.
+
+For more information, please visit [I18n for WordPress Developers](https://codex.wordpress.org/I18n_for_WordPress_Developers).
+
 ## Command Reference
 
 ### Docker

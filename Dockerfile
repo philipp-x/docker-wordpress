@@ -5,6 +5,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apt-utils \
     vim \
+    gettext \
     nodejs
 RUN npm -g install npm@latest
 RUN npm install --global gulp-cli
@@ -15,4 +16,5 @@ RUN echo 'file_uploads = On\n'\
 'post_max_size = 64M\n'\
 'max_execution_time = 600'\
 > /usr/local/etc/php/conf.d/uploads.ini
+RUN docker-php-ext-install gettext
 WORKDIR /var/www/html/

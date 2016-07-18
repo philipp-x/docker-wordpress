@@ -10,7 +10,7 @@
 get_header(); ?>
 
             <div class="starter-template">
-                <h1>Hello, world!</h1>
+                <h1><?php _e( 'Hello, world!', 'mytheme' ); ?></h1>
             </div>
 
 <?php get_footer(); ?>
