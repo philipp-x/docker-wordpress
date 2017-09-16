@@ -3,6 +3,7 @@
  * $ npm install gulp gulp-clean-css gulp-sass gulp-rename gulp-uglify --save-dev
  * Install app dependencies using the package.json
  * $ npm install --production
+ * $ npm install --only=dev
  * npm will not install modules listed in devDependencies
  */
 

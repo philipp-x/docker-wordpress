@@ -18,3 +18,7 @@ RUN echo 'file_uploads = On\n'\
 > /usr/local/etc/php/conf.d/uploads.ini
 RUN docker-php-ext-install gettext
 WORKDIR /var/www/html/
+ENV PATH=/node_modules/.bin:$PATH
+RUN npm install -g npm-install-retry
+COPY wp-content/themes/mytheme/package.json /
+RUN (cd / && npm-install-retry -- --development && rm -rf /tmp/*)

@@ -6,11 +6,11 @@ Docker Engine is supported on Linux, Cloud, Windows and OS X. If you haven't use
 
 ## Requirements
 
-* Docker Toolbox 1.11 or higher
+* Docker v17.06 or higher
 
 ## Setup
 
-1. Make sure [Docker Toolbox](https://www.docker.com/products/docker-toolbox) is installed and running.
+1. Make sure [Docker](https://store.docker.com/) is installed and running.
 2. Run the following commands in the given order:
 
 ```bash
@@ -24,7 +24,7 @@ docker-compose up -d
 # Start the containers in the background
 ```
 
-At this point, your WordPress website should be running at port `8000` on your Docker host. If you are using a Docker Machine VM, you can use the `docker-machine ip MACHINE_NAME` to get the IP address.
+At this point, your WordPress website should be running at port `8000` on your Docker host.
 
 Type `docker-compose stop` to stop running containers without removing them.
 
@@ -40,10 +40,9 @@ Type `docker-compose stop` to stop running containers without removing them.
 
 1. Make sure no container is running.
 2. Open `docker-compose.yml` and uncomment line 17 and 18.
-3. Type `docker-compose run --rm web bash` to run an interactive shell in the image.
-4. Install app dependencies with `npm install --prefix wp-content/themes/mytheme --save-dev`.
-5. Log in to the WordPress Admin Panels and select the `Appearance` panel, then `Themes`.
-6. To activate the Theme click the `Activate` button.
+3. Type `docker-compose up -d` to start the containers in the background.
+4. Log in to the WordPress Admin Panels and select the `Appearance` panel, then `Themes`.
+5. To activate the Theme click the `Activate` button.
 
 ### I18n
 
