@@ -24,3 +24,6 @@ ENV PATH=/node_modules/.bin:$PATH
 RUN npm install -g npm-install-retry
 COPY wp-content/themes/mytheme/package.json /
 RUN (cd / && npm-install-retry -- --development && rm -rf /tmp/*)
+RUN curl -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x /usr/local/bin/wp-cli.phar
+RUN mv /usr/local/bin/wp-cli.phar /usr/local/bin/wp
