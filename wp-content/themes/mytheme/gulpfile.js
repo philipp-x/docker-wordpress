@@ -15,6 +15,8 @@ var cleanCSS = require('gulp-clean-css');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var del = require('del');
 
 /*
  * Settings
@@ -57,10 +59,24 @@ gulp.task('sass', function () {
  */
 gulp.task('compress', function() {
     return gulp.src(patterns.js)
+        .pipe(concat('base.js'))
+        .pipe(gulp.dest(paths.dist+paths.js))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest(paths.dist+paths.js));
 });
+
+/*
+ * Clean
+ */
+gulp.task('clean', function () {
+    return del([
+        paths.dist+'*/*.*',
+        '!'+paths.dist+'*/*.min.*',
+    ]);
+});
+
+gulp.task('minify-js', ['compress', 'clean']);
 
 /*
  * Default task
