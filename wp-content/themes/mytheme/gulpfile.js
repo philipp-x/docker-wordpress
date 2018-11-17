@@ -16,12 +16,12 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var del = require('del');
 
 /*
  * Settings
  */
 var paths = {
+    'project': './',
     'css': './css/',
     'sass': './sass/',
     'js': './js/',
@@ -29,9 +29,9 @@ var paths = {
 };
 
 var patterns = {
-    'css': ['style.css', paths.css+'*.css', paths.css+'**/*.css', '!'+paths.css+'*.min.css', '!'+paths.css+'**/*.min.css'],
-    'sass': [paths.sass+'*.scss', paths.sass+'**/*.scss'],
-    'js': [paths.js+'*.js', paths.js+'**/*.js', '!'+paths.js+'*.min.js', '!'+paths.js+'**/*.min.js'],
+    'css': [paths.css+'*.css', paths.css+'**/*.css', '!'+paths.css+'*.min.css', '!'+paths.css+'**/*.min.css'],
+    'sass': [paths.sass+'style.scss'],
+    'js': [paths.js+'*.js', paths.js+'**/*.js', '!'+paths.js+'*.min.js', '!'+paths.js+'**/*.min.js', '!'+paths.js+'customizer.js', '!'+paths.js+'navigation.js', '!'+paths.js+'skip-link-focus-fix.js'],
 };
 
 /*
@@ -49,6 +49,8 @@ gulp.task('minify-css', function() {
  */
 gulp.task('sass', function () {
     return gulp.src(patterns.sass)
+        .pipe(sass({outputStyle: 'expanded'}))
+        .pipe(gulp.dest(paths.project))
         .pipe(rename({suffix: '.min'}))
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulp.dest(paths.dist+paths.css));
@@ -59,24 +61,11 @@ gulp.task('sass', function () {
  */
 gulp.task('compress', function() {
     return gulp.src(patterns.js)
-        .pipe(concat('base.js'))
+        .pipe(concat('base.min.js'))
         .pipe(gulp.dest(paths.dist+paths.js))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
+        .pipe(uglify({compress: { unused: false } }))
         .pipe(gulp.dest(paths.dist+paths.js));
 });
-
-/*
- * Clean
- */
-gulp.task('clean', function () {
-    return del([
-        paths.dist+'*/*.*',
-        '!'+paths.dist+'*/*.min.*',
-    ]);
-});
-
-gulp.task('minify-js', ['compress', 'clean']);
 
 /*
  * Default task
