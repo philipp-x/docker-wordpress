@@ -10,6 +10,7 @@
         "gulp-rename": "^1.4.0",
         "gulp-uglify": "^3.0.1",
         "gulp-concat": "^2.6.1",
+        "gulp-svgmin": "^2.1.0"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

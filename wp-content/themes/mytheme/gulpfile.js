@@ -16,6 +16,7 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+var svgmin = require('gulp-svgmin');
 
 /*
  * Settings
@@ -25,6 +26,7 @@ var paths = {
     'css': './css/',
     'sass': './sass/',
     'js': './js/',
+    'svg': './src/svg/',
     'dist': './dist/',
 };
 
@@ -32,6 +34,7 @@ var patterns = {
     'css': [paths.css+'*.css', paths.css+'**/*.css', '!'+paths.css+'*.min.css', '!'+paths.css+'**/*.min.css'],
     'sass': [paths.sass+'style.scss'],
     'js': [paths.js+'*.js', paths.js+'**/*.js', '!'+paths.js+'*.min.js', '!'+paths.js+'**/*.min.js', '!'+paths.js+'customizer.js', '!'+paths.js+'navigation.js', '!'+paths.js+'skip-link-focus-fix.js'],
+    'svg': [paths.svg+'*.svg', paths.svg+'**/*.svg'],
 };
 
 /*
@@ -65,6 +68,15 @@ gulp.task('compress', function() {
         .pipe(gulp.dest(paths.dist+paths.js))
         .pipe(uglify({compress: { unused: false } }))
         .pipe(gulp.dest(paths.dist+paths.js));
+});
+
+/*
+ * Sprites
+ */
+gulp.task('sprite:optimise', function() {
+    return gulp.src(patterns.svg)
+        .pipe(svgmin())
+        .pipe(gulp.dest(paths.dist+'svg/'));
 });
 
 /*

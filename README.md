@@ -78,6 +78,8 @@ docker-compose run --rm web gulp sass
 # Compile Sass files
 docker-compose run --rm web gulp compress
 # Minify JavaScript files
+docker-compose run --rm web gulp sprite:optimise
+# Optimise SVG files
 ```
 
 ### Docker
