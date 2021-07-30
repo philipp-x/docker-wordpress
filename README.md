@@ -26,14 +26,15 @@ docker-compose up -d
 
 3. Use `http://localhost:8000` to open WordPress in a web browser
 4. Complete the famous five-minute installation as a WordPress administrator
-5. Run the following commands in the given order:
+5. Run `docker-compose run --rm web bash` to SSH into the Docker container
+6. Run the following commands in the given order:
 
 ```bash
 wp scaffold _s mytheme --theme_name="My Theme" --author="Philipp Havrilla" --author_uri="http://underscores.me/" --sassify --allow-root
 # Using WP-CLI to create an _s-based theme
 ```
 
-6. To activate the theme log in to the WordPress Admin and go to `Appearance`, then `Themes` and click the `Activate` button
+7. To activate the theme log in to the WordPress Admin and go to `Appearance`, then `Themes` and click the `Activate` button
 
 The command `docker-compose down` removes the containers and default network, but preserves your WordPress database.
 
@@ -45,7 +46,8 @@ If you want to change the theme name to something else find and replace `mytheme
 
 * Theme folder located under `wp-content` and `themes`
 * `Dockerfile` line 25
-* `docker-compose.yml` line 9
+* `docker-compose.yml` line 8
+* `makepot.sh` line 2 and line 13
 * `wp scaffold _s` slug
 
 ## Upgrade

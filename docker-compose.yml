@@ -1,23 +1,22 @@
-version: '3.3'
+version: "3.9"
 
 services:
   web:
-    depends_on:
-      - db
     build: .
+    env_file: .env
     volumes:
       - ./wp-content/themes/mytheme:/var/www/html/wp-content/themes/mytheme
-      - web_data:/var/www/html
+      - wordpress:/var/www/html
     ports:
       - "8000:80"
-    env_file: .env
-
+    depends_on:
+      - db
   db:
     image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
     env_file: .env
+    volumes:
+      - db:/var/lib/mysql
 
 volumes:
-    web_data:
-    db_data:
+  wordpress:
+  db:
