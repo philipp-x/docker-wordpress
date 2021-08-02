@@ -45,7 +45,6 @@ For more information, please visit [Compose and WordPress](https://docs.docker.c
 If you want to change the theme name to something else find and replace `mytheme` at these locations:
 
 * Theme folder located under `wp-content` and `themes`
-* `Dockerfile` line 25
 * `docker-compose.yml` line 8
 * `makepot.sh` line 2 and line 13
 * `wp scaffold _s` slug

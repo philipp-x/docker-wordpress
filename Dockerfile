@@ -8,7 +8,7 @@ RUN apt-get update && \
     nodejs \
     build-essential \
     gnupg
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install --global gulp-cli
 RUN echo 'opcache.enable=0' >> /usr/local/etc/php/conf.d/opcache-recommended.ini
@@ -21,9 +21,8 @@ RUN echo 'file_uploads = On\n'\
 RUN docker-php-ext-install gettext
 WORKDIR /var/www/html/
 ENV PATH=/node_modules/.bin:$PATH
-RUN npm install -g npm-install-retry
-COPY wp-content/themes/mytheme/package.json /
-RUN (cd / && npm-install-retry -- --development && rm -rf /tmp/*)
+COPY package.json /
+RUN (cd / && npm install)
 RUN curl -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x /usr/local/bin/wp-cli.phar
 RUN mv /usr/local/bin/wp-cli.phar /usr/local/bin/wp
